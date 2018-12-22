@@ -1,5 +1,16 @@
-﻿namespace LittleTetris
+﻿using System;
+using System.Windows.Forms;
+
+namespace LittleTetris
 {
+    public interface ITetris
+    {
+        void FillField();
+        void TickTimer_Tick(object sender, EventArgs e);
+        void Form1_KeyDown(object sender, KeyEventArgs e);
+        void SetShape();
+        bool FindMistake();
+    }
 
     partial class Form1
     {
