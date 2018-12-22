@@ -52,7 +52,7 @@ namespace LittleTetris {
             FieldPictureBox.Image = Bitfield;
         }
 
-        private void TickTimer_Tick(object sender, System.EventArgs e) {
+        private void TickTimer_Tick(object sender, EventArgs e) {
             if (Field[8, 3] == 1)
                 Environment.Exit(0);
             for (var i = 0; i < 4; i++)
@@ -76,11 +76,6 @@ namespace LittleTetris {
 
             FillField();
         }
-
-        //private void Form1_KeyDown(object sender, KeyEventArgs e) {
-        //    // ReSharper disable once SwitchStatementMissingSomeCases
-
-        //}
 
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
@@ -127,7 +122,6 @@ namespace LittleTetris {
 
         public void SetShape() {
             var x = new Random(DateTime.Now.Millisecond);
-            // ReSharper disable once SwitchStatementMissingSomeCases
             var val = x.Next(7);
             switch (val) {
                 case 0:
