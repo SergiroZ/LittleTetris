@@ -1,11 +1,15 @@
 ﻿namespace LittleTetris
 {
+
     partial class Form1
     {
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private static System.Timers.Timer aTimer;
+
+
 
         /// <summary>
         /// Освободить все используемые ресурсы.
@@ -15,6 +19,8 @@
         {
             if (disposing && (components != null))
             {
+                aTimer.Stop();
+                aTimer.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
