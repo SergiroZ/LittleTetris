@@ -77,9 +77,15 @@ namespace LittleTetris {
             FillField();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e) {
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (e.KeyCode) {
+        //private void Form1_KeyDown(object sender, KeyEventArgs e) {
+        //    // ReSharper disable once SwitchStatementMissingSomeCases
+
+        //}
+
+        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
                 case Keys.A:
                     for (var i = 0; i < 4; i++)
                         Shape[1, i]--;
@@ -98,14 +104,16 @@ namespace LittleTetris {
                     var shapeT = new int[2, 4];
                     Array.Copy(Shape, shapeT, Shape.Length);
                     int max_x = 0, max_y = 0;
-                    for (var i = 0; i < 4; i++) {
+                    for (var i = 0; i < 4; i++)
+                    {
                         if (Shape[0, i] > max_y)
                             max_y = Shape[0, i];
                         if (Shape[1, i] > max_x)
                             max_x = Shape[1, i];
                     }
 
-                    for (var i = 0; i < 4; i++) {
+                    for (var i = 0; i < 4; i++)
+                    {
                         var temp = Shape[0, i];
                         Shape[0, i] = max_y - (max_x - Shape[1, i]) - 1;
                         Shape[1, i] = max_x - (3 - (max_y - temp)) + 1;

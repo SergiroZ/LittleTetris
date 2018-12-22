@@ -8,7 +8,7 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private static System.Timers.Timer aTimer;
-
+        private System.Windows.Forms.PictureBox FieldPictureBox;
 
 
         /// <summary>
@@ -56,14 +56,13 @@
             this.Controls.Add(this.FieldPictureBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown_1);
             ((System.ComponentModel.ISupportInitialize)(this.FieldPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox FieldPictureBox;
     }
 }
 
