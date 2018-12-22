@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Linq;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using static System.Drawing.Graphics;
+using Timer = System.Timers.Timer;
 
 namespace LittleTetris {
     public partial class Form1 : Form {
-        public const int width = 15, height = 25, k = 15;
-        public int[,] Shape = new int[2, 4];
+        public const int width = 15;
+        public const int height = 25;
+        public const int k = 15;
+        public Bitmap Bitfield = new Bitmap(k * width + 1, k * height + 1);
         public int[,] Field = new int[width, height];
-        public Bitmap Bitfield = new Bitmap(k * (width + 1) + 1, k * (height + 3) + 1);
         public Graphics Gr;
+        public int[,] Shape = new int[2, 4];
 
 
         public Form1() {
-            aTimer = new System.Timers.Timer(200);
+            aTimer = new Timer(200);
             aTimer.Elapsed += TickTimer_Tick;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
@@ -36,16 +39,16 @@ namespace LittleTetris {
             for (var i = 0; i < width; i++)
             for (var j = 0; j < height; j++)
                 if (Field[i, j] == 1) {
-                    Gr.FillRectangle(Brushes.Green, i * k, 
+                    Gr.FillRectangle(Brushes.Green, i * k,
                         j * k, k, k);
-                    Gr.DrawRectangle(Pens.Black, i * k, 
+                    Gr.DrawRectangle(Pens.Black, i * k,
                         j * k, k, k);
                 }
 
             for (var i = 0; i < 4; i++) {
-                Gr.FillRectangle(Brushes.Red, Shape[1, i] * k, 
+                Gr.FillRectangle(Brushes.Red, Shape[1, i] * k,
                     Shape[0, i] * k, k, k);
-                Gr.DrawRectangle(Pens.Black, Shape[1, i] * k, 
+                Gr.DrawRectangle(Pens.Black, Shape[1, i] * k,
                     Shape[0, i] * k, k, k);
             }
 
@@ -77,38 +80,34 @@ namespace LittleTetris {
             FillField();
         }
 
-        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.A:
+        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+            switch (e.KeyCode) {
+                case Keys.NumPad4:
                     for (var i = 0; i < 4; i++)
                         Shape[1, i]--;
                     if (FindMistake())
                         for (var i = 0; i < 4; i++)
                             Shape[1, i]++;
                     break;
-                case Keys.D:
+                case Keys.NumPad6:
                     for (var i = 0; i < 4; i++)
                         Shape[1, i]++;
                     if (FindMistake())
                         for (var i = 0; i < 4; i++)
                             Shape[1, i]--;
                     break;
-                case Keys.W:
+                case Keys.NumPad5:
                     var shapeT = new int[2, 4];
                     Array.Copy(Shape, shapeT, Shape.Length);
                     int max_x = 0, max_y = 0;
-                    for (var i = 0; i < 4; i++)
-                    {
+                    for (var i = 0; i < 4; i++) {
                         if (Shape[0, i] > max_y)
                             max_y = Shape[0, i];
                         if (Shape[1, i] > max_x)
                             max_x = Shape[1, i];
                     }
 
-                    for (var i = 0; i < 4; i++)
-                    {
+                    for (var i = 0; i < 4; i++) {
                         var temp = Shape[0, i];
                         Shape[0, i] = max_y - (max_x - Shape[1, i]) - 1;
                         Shape[1, i] = max_x - (3 - (max_y - temp)) + 1;
