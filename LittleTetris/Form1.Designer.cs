@@ -3,13 +3,33 @@ using System.Windows.Forms;
 
 namespace LittleTetris
 {
-    public interface ITetris
+    public interface ITetrisTimer
+    {
+        void TickTimer_Tick(object sender, EventArgs e);
+    }
+
+    public interface ITetrisFill
     {
         void FillField();
-        void TickTimer_Tick(object sender, EventArgs e);
+    }
+
+    public interface ITetrisKeyDown
+    {
         void Form1_KeyDown(object sender, KeyEventArgs e);
+    }
+
+    public interface ITetrisSetShape
+    {
         void SetShape();
+    }
+
+    public interface ITetrisFindMistake
+    {
         bool FindMistake();
+    }
+
+    public interface ITetris : ITetrisTimer, ITetrisFill, ITetrisKeyDown, ITetrisSetShape, ITetrisFindMistake
+    {
     }
 
     partial class Form1
